@@ -5878,6 +5878,7 @@ namespace Nop.Services.Installation
                 SitemapIncludeCategories = true,
                 SitemapIncludeManufacturers = true,
                 SitemapIncludeProducts = false,
+                SitemapIncludeProductTags = false,
                 DisplayJavaScriptDisabledWarning = false,
                 UseFullTextSearch = false,
                 FullTextMode = FulltextSearchMode.ExactMatch,
@@ -5972,7 +5973,8 @@ namespace Nop.Services.Installation
                 RichEditorAdditionalSettings = null,
                 RichEditorAllowJavaScript = false,
                 UseRichEditorInMessageTemplates = false,
-                UseIsoDateTimeConverterInJson = true
+                UseIsoDateTimeConverterInJson = true,
+                UseNestedSettingJavascript = true
             });
 
 
@@ -6056,6 +6058,7 @@ namespace Nop.Services.Installation
                 ShowProductReviewsTabOnAccountPage = true,
                 ProductReviewsPageSizeOnAccountPage = 10,
                 ExportImportProductAttributes = true,
+                ExportImportProductSpecificationAttributes = true,
                 ExportImportUseDropdownlistsForAssociatedEntities = true
             });
 
