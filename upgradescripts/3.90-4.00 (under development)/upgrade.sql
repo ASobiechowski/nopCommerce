@@ -325,7 +325,28 @@ set @resources='
   </LocaleResource>
   <LocaleResource Name="Sitemap.ProductTags">
     <Value>Product tags</Value>
-  </LocaleResource>   
+  </LocaleResource> 
+  <LocaleResource Name="Admin.System.Warnings.IncompatiblePlugin">
+    <Value></Value>
+  </LocaleResource>  
+  <LocaleResource Name="Admin.System.Warnings.PluginNotLoaded">
+    <Value>''{0}'' plugin is not compatible or cannot be loaded.</Value>
+  </LocaleResource>  
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ExportImportProductCategoryBreadcrumb">
+    <Value>Export/Import products with category breadcrumb</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.Catalog.ExportImportProductCategoryBreadcrumb.Hint">
+    <Value>Check if products should be exported/imported with a full category name including names of all its parents.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.BlockTitle.AdminArea">
+    <Value>Admin area</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AdminArea.UseRichEditorInMessageTemplates">
+    <Value>Use rich editor on message templates</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.AdminArea.UseRichEditorInMessageTemplates.Hint">
+    <Value>Indicates whether to use rich editor on message templates and campaigns details pages.</Value>
+  </LocaleResource>  
 </Language>
 '
 
@@ -673,10 +694,10 @@ END
 GO
 
 --new setting
-IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'adminareasettings.usenestedsettingjavascript')
+IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'adminareasettings.usenestedsetting')
 BEGIN
 	INSERT [Setting] ([Name], [Value], [StoreId])
-	VALUES (N'adminareasettings.usenestedsettingjavascript', N'True', 0)
+	VALUES (N'adminareasettings.usenestedsetting', N'True', 0)
 END
 GO
 
@@ -692,5 +713,13 @@ IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'commonsettings.sitemapin
 BEGIN
 	INSERT [Setting] ([Name], [Value], [StoreId])
 	VALUES (N'commonsettings.sitemapincludeproducttags', N'False', 0)
+END
+GO
+
+--new setting
+IF NOT EXISTS (SELECT 1 FROM [Setting] WHERE [name] = N'catalogsettings.exportimportproductcategorybreadcrumb')
+BEGIN
+	INSERT [Setting] ([Name], [Value], [StoreId])
+	VALUES (N'catalogsettings.exportimportproductcategorybreadcrumb', N'True', 0)
 END
 GO

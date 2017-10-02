@@ -18,6 +18,7 @@
                 <i class="fa fa-floppy-o"></i>
                 @T("Admin.Common.Save")
             </button>
+            @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_general_common_settings_buttons" })
         </div>
     </div>
 
@@ -31,10 +32,10 @@
 
         function toggleSitemapSettings() {
             if ($('#@Html.IdFor(model => model.StoreInformationSettings.SitemapEnabled)').is(':checked')) {
-                $("#pnlSitemapIncludeCategories, #pnlSitemapIncludeManufacturers, #pnlSitemapIncludeProducts, #pnlSitemapIncludeProductTagss").show();
+                $("#pnlSitemapIncludeCategories, #pnlSitemapIncludeManufacturers, #pnlSitemapIncludeProducts, #pnlSitemapIncludeProductTags").show();
             }
             else {
-                $("#pnlSitemapIncludeCategories, #pnlSitemapIncludeManufacturers, #pnlSitemapIncludeProducts, #pnlSitemapIncludeProductTagss").hide();
+                $("#pnlSitemapIncludeCategories, #pnlSitemapIncludeManufacturers, #pnlSitemapIncludeProducts, #pnlSitemapIncludeProductTags").hide();
             }
         }
 
@@ -54,6 +55,7 @@
             <div asp-validation-summary="All"></div>
 
             <div class="panel-group">
+                @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_general_common_settings_top" })
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         @T("Admin.Configuration.Settings.GeneralCommon.BlockTitle.Common")
@@ -71,9 +73,8 @@
                                         <div class="checkbox">
                                             <label>
                                                 <span>
-                                                    <input type="radio" name="@Html.NameFor(x => x.StoreInformationSettings.DefaultStoreTheme)" value="@theme.ThemeName"
-                                                           @if (theme.ThemeName == Model.StoreInformationSettings.DefaultStoreTheme) { <text> checked="checked" </text>    }>
-                                                    @theme.ThemeTitle
+                                                    <input type="radio" name="@Html.NameFor(x => x.StoreInformationSettings.DefaultStoreTheme)" value="@theme.SystemName" @if (theme.SystemName.Equals(Model.StoreInformationSettings.DefaultStoreTheme, StringComparison.InvariantCultureIgnoreCase)) { <text> checked="checked" </text> }>
+                                                    @theme.Title
                                                 </span>
                                                 <img src="@Url.Content(theme.PreviewImageUrl)" alt="@theme.PreviewText" title="@theme.PreviewText">
                                             </label>
@@ -329,7 +330,7 @@
                                     <span asp-validation-for="StoreInformationSettings.SitemapIncludeProducts"></span>
                                 </div>
                             </div>
-                            <div class="form-group advanced-setting" id="pnlSitemapIncludeProductTagss">
+                            <div class="form-group advanced-setting" id="pnlSitemapIncludeProductTags">
                                 <div class="col-md-3">
                                     <nop-override-store-checkbox asp-for="StoreInformationSettings.SitemapIncludeProductTags_OverrideForStore" asp-input="StoreInformationSettings.SitemapIncludeProductTags" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
                                     <nop-label asp-for="StoreInformationSettings.SitemapIncludeProductTags" />
@@ -928,6 +929,7 @@
                         </div>
                     </div>
                 </div>
+                @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_general_common_settings_bottom" })
             </div>
         </div>
     </div>
