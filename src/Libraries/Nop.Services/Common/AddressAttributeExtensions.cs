@@ -19,6 +19,7 @@ namespace Nop.Services.Common
                 return false;
 
             if (addressAttribute.AttributeControlType == AttributeControlType.TextBox ||
+                addressAttribute.AttributeControlType == AttributeControlType.NumericBox ||
                 addressAttribute.AttributeControlType == AttributeControlType.MultilineTextbox ||
                 addressAttribute.AttributeControlType == AttributeControlType.Datepicker ||
                 addressAttribute.AttributeControlType == AttributeControlType.FileUpload)

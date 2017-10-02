@@ -673,6 +673,7 @@ namespace Nop.Web.Areas.Admin.Extensions
                         }
                         break;
                     case AttributeControlType.TextBox:
+                    case AttributeControlType.NumericBox:
                     case AttributeControlType.MultilineTextbox:
                         {
                             if (!String.IsNullOrEmpty(selectedAddressAttributes))

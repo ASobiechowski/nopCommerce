@@ -22,6 +22,7 @@ namespace Nop.Services.Orders
                 return false;
 
             if (checkoutAttribute.AttributeControlType == AttributeControlType.TextBox ||
+                checkoutAttribute.AttributeControlType == AttributeControlType.NumericBox ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.MultilineTextbox ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.Datepicker ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.FileUpload)
@@ -43,6 +44,7 @@ namespace Nop.Services.Orders
 
             if (checkoutAttribute.AttributeControlType == AttributeControlType.ReadonlyCheckboxes ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.TextBox ||
+                checkoutAttribute.AttributeControlType == AttributeControlType.NumericBox ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.MultilineTextbox ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.Datepicker ||
                 checkoutAttribute.AttributeControlType == AttributeControlType.FileUpload)

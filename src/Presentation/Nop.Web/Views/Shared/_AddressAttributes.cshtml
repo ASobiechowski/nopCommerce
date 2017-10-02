@@ -54,6 +54,11 @@
             case AttributeControlType.TextBox:
             {
                 <input name="@(controlId)" type="text" class="textbox" id="@(controlId)" value="@attribute.DefaultValue" />
+                }
+                break;
+            case AttributeControlType.NumericBox:
+                {
+                <input name="@(controlId)" type="text" class="textbox" id="@(controlId)" value="@attribute.DefaultValue" />
             }
             break;
             case AttributeControlType.MultilineTextbox:

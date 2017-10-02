@@ -22,6 +22,10 @@ namespace Nop.Core.Domain.Catalog
         /// </summary>
         TextBox = 4,
         /// <summary>
+        /// NumericBox
+        /// </summary>
+        NumericBox = 5,
+        /// <summary>
         /// Multiline textbox
         /// </summary>
         MultilineTextbox = 10,

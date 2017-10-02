@@ -20,6 +20,7 @@ namespace Nop.Services.Customers
                 return false;
 
             if (customerAttribute.AttributeControlType == AttributeControlType.TextBox ||
+                customerAttribute.AttributeControlType == AttributeControlType.NumericBox ||
                 customerAttribute.AttributeControlType == AttributeControlType.MultilineTextbox ||
                 customerAttribute.AttributeControlType == AttributeControlType.Datepicker ||
                 customerAttribute.AttributeControlType == AttributeControlType.FileUpload)

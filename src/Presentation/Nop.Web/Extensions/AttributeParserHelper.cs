@@ -69,6 +69,7 @@ namespace Nop.Web.Extensions
                         }
                         break;
                     case AttributeControlType.TextBox:
+                    case AttributeControlType.NumericBox:
                     case AttributeControlType.MultilineTextbox:
                         {
                             var ctrlAttributes = form[controlId];

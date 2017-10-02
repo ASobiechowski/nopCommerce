@@ -601,6 +601,7 @@ namespace Nop.Services.Orders
                 if (pam.ValidationMinLength.HasValue)
                 {
                     if (pam.AttributeControlType == AttributeControlType.TextBox ||
+                        pam.AttributeControlType == AttributeControlType.NumericBox ||
                         pam.AttributeControlType == AttributeControlType.MultilineTextbox)
                     {
                         var valuesStr = _productAttributeParser.ParseValues(attributesXml, pam.Id);
@@ -618,6 +619,7 @@ namespace Nop.Services.Orders
                 if (pam.ValidationMaxLength.HasValue)
                 {
                     if (pam.AttributeControlType == AttributeControlType.TextBox ||
+                        pam.AttributeControlType == AttributeControlType.NumericBox ||
                         pam.AttributeControlType == AttributeControlType.MultilineTextbox)
                     {
                         var valuesStr = _productAttributeParser.ParseValues(attributesXml, pam.Id);
@@ -927,6 +929,7 @@ namespace Nop.Services.Orders
                     if (ca.ValidationMinLength.HasValue)
                     {
                         if (ca.AttributeControlType == AttributeControlType.TextBox ||
+                            ca.AttributeControlType == AttributeControlType.NumericBox ||
                             ca.AttributeControlType == AttributeControlType.MultilineTextbox)
                         {
                             var valuesStr = _checkoutAttributeParser.ParseValues(checkoutAttributesXml, ca.Id);
@@ -944,6 +947,7 @@ namespace Nop.Services.Orders
                     if (ca.ValidationMaxLength.HasValue)
                     {
                         if (ca.AttributeControlType == AttributeControlType.TextBox ||
+                            ca.AttributeControlType == AttributeControlType.NumericBox ||
                             ca.AttributeControlType == AttributeControlType.MultilineTextbox)
                         {
                             var valuesStr = _checkoutAttributeParser.ParseValues(checkoutAttributesXml, ca.Id);
