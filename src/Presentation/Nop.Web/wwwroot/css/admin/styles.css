@@ -1304,7 +1304,7 @@ span.grid-report-item.red {
 }
 
 /*bootstrap touchspin*/
-.bootstrap-touchspin {
+/*.bootstrap-touchspin {
     max-width: 300px;
 }
 .bootstrap-touchspin input {
@@ -1335,7 +1335,7 @@ span.grid-report-item.red {
 .bootstrap-touchspin .input-group-btn-vertical .bootstrap-touchspin-down {
    margin-top: -1px;
    height: 17px;
-}
+}*/
 
 /* THROBBER */
 .throbber-header {

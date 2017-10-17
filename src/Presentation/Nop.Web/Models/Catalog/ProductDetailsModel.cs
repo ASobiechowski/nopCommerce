@@ -268,6 +268,12 @@ namespace Nop.Web.Models.Catalog
             /// </summary>
             public bool HasCondition { get; set; }
 
+            public decimal? NumericDefaultValue { get; set; }
+            public string NumericUnit { get; set; }
+            public decimal? ValidationNumericMinValue { get; set; }
+            public decimal? ValidationNumericMaxValue { get; set; }
+            public int? ValidationNumericPrecision { get; set; }
+
             /// <summary>
             /// Allowed file extensions for customer uploaded files
             /// </summary>

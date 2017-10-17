@@ -18,30 +18,64 @@
             $('#pnlValidationFileMaximumSize').hide();
             $('#pnlValidationFileAllowedExtensions').hide();
             $('#pnlDefaultValue').show();
+
+            $('#pnlValidationNumericMinValue').hide();
+            $('#pnlValidationNumericMaxValue').hide();
+            $('#pnlNumericDefaultValue').hide();
+            $('#pnlIsPriceMultiply').hide();
+            $('#pnlNumericUnit').hide();
+            $('#pnlValidationNumericPrecision').hide();
         } else if (selectedAttributeControlTypeId == @(((int) AttributeControlType.NumericBox).ToString())) {
-            $('#pnlValidationMinLength').show();
-            $('#pnlValidationMaxLength').show();
+            $('#pnlValidationNumericMinValue').show();
+            $('#pnlValidationNumericMaxValue').show();
+            $('#pnlNumericDefaultValue').show();
+            $('#pnlIsPriceMultiply').show();
+            $('#pnlNumericUnit').show();
+            $('#pnlValidationNumericPrecision').show();
+            $('#pnlValidationMinLength').hide();
+            $('#pnlValidationMaxLength').hide();
             $('#pnlValidationFileMaximumSize').hide();
             $('#pnlValidationFileAllowedExtensions').hide();
-            $('#pnlDefaultValue').show();
+            $('#pnlDefaultValue').hide();
         } else if (selectedAttributeControlTypeId == @(((int) AttributeControlType.MultilineTextbox).ToString())) {
             $('#pnlValidationMinLength').show();
             $('#pnlValidationMaxLength').show();
             $('#pnlValidationFileMaximumSize').hide();
             $('#pnlValidationFileAllowedExtensions').hide();
             $('#pnlDefaultValue').show();
+
+            $('#pnlValidationNumericMinValue').hide();
+            $('#pnlValidationNumericMaxValue').hide();
+            $('#pnlNumericDefaultValue').hide();
+            $('#pnlIsPriceMultiply').hide();
+            $('#pnlNumericUnit').hide();
+            $('#pnlValidationNumericPrecision').hide();
         } else if (selectedAttributeControlTypeId == @(((int) AttributeControlType.FileUpload).ToString())) {
             $('#pnlValidationMinLength').hide();
             $('#pnlValidationMaxLength').hide();
             $('#pnlValidationFileMaximumSize').show();
             $('#pnlValidationFileAllowedExtensions').show();
             $('#pnlDefaultValue').hide();
+
+            $('#pnlValidationNumericMinValue').hide();
+            $('#pnlValidationNumericMaxValue').hide();
+            $('#pnlNumericDefaultValue').hide();
+            $('#pnlIsPriceMultiply').hide();
+            $('#pnlNumericUnit').hide();
+            $('#pnlValidationNumericPrecision').hide();
         } else {
             $('#pnlValidationMinLength').hide();
             $('#pnlValidationMaxLength').hide();
             $('#pnlValidationFileMaximumSize').hide();
             $('#pnlValidationFileAllowedExtensions').hide();
             $('#pnlDefaultValue').hide();
+
+            $('#pnlValidationNumericMinValue').hide();
+            $('#pnlValidationNumericMaxValue').hide();
+            $('#pnlNumericDefaultValue').hide();
+            $('#pnlIsPriceMultiply').hide();
+            $('#pnlNumericUnit').hide();
+            $('#pnlValidationNumericPrecision').hide();
         }
 
         //values
@@ -142,6 +176,24 @@
                     <span asp-validation-for="ValidationMaxLength"></span>
                 </div>
             </div>
+            <div class="form-group" id="pnlValidationNumericMinValue">
+                <div class="col-md-3">
+                    <nop-label asp-for="ValidationNumericMinValue" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ValidationNumericMinValue" />
+                    <span asp-validation-for="ValidationNumericMinValue"></span>
+                </div>
+            </div>
+            <div class="form-group" id="pnlValidationNumericMaxValue">
+                <div class="col-md-3">
+                    <nop-label asp-for="ValidationNumericMaxValue" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ValidationNumericMaxValue" />
+                    <span asp-validation-for="ValidationNumericMaxValue"></span>
+                </div>
+            </div>
             <div class="form-group" id="pnlValidationFileAllowedExtensions">
                 <div class="col-md-3">
                     <nop-label asp-for="ValidationFileAllowedExtensions" />
@@ -167,6 +219,42 @@
                 <div class="col-md-9">
                     <nop-editor asp-for="DefaultValue" />
                     <span asp-validation-for="DefaultValue"></span>
+                </div>
+            </div>            
+            <div class="form-group" id="pnlNumericDefaultValue">
+                <div class="col-md-3">
+                    <nop-label asp-for="NumericDefaultValue" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="NumericDefaultValue" />
+                    <span asp-validation-for="NumericDefaultValue"></span>
+                </div>
+            </div>
+            <div class="form-group" id="pnlNumericUnit">
+                <div class="col-md-3">
+                    <nop-label asp-for="NumericUnit" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="NumericUnit" />
+                    <span asp-validation-for="NumericUnit"></span>
+                </div>
+            </div>
+            <div class="form-group" id="pnlValidationNumericPrecision">
+                <div class="col-md-3">
+                    <nop-label asp-for="ValidationNumericPrecision" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="ValidationNumericPrecision" />
+                    <span asp-validation-for="ValidationNumericPrecision"></span>
+                </div>
+            </div>
+            <div class="form-group" id="pnlIsPriceMultiply">
+                <div class="col-md-3">
+                    <nop-label asp-for="IsPriceMultiply" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="IsPriceMultiply" />
+                    <span asp-validation-for="IsPriceMultiply"></span>
                 </div>
             </div>
         </div>

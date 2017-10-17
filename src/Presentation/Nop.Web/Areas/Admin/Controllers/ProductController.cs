@@ -932,6 +932,13 @@ namespace Nop.Web.Areas.Admin.Controllers
                     model.ValidationFileAllowedExtensions = pam.ValidationFileAllowedExtensions;
                     model.ValidationFileMaximumSize = pam.ValidationFileMaximumSize;
                     model.DefaultValue = pam.DefaultValue;
+
+                    model.NumericDefaultValue = pam.NumericDefaultValue;
+                    model.NumericUnit = pam.NumericUnit;
+                    model.IsPriceMultiply = pam.IsPriceMultiply;
+                    model.ValidationNumericMinValue = pam.ValidationNumericMinValue;
+                    model.ValidationNumericMaxValue = pam.ValidationNumericMaxValue;
+                    model.ValidationNumericPrecision = pam.ValidationNumericPrecision;
                 }
                 
                 if (pam.ValidationRulesAllowed())
@@ -3730,7 +3737,7 @@ namespace Nop.Web.Areas.Admin.Controllers
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageProducts))
                 return AccessDeniedView();
-
+             
             var pam = _productAttributeService.GetProductAttributeMappingById(id);
             if (pam == null)
                 throw new ArgumentException("No product attribute mapping found with the specified id");
@@ -3802,7 +3809,16 @@ namespace Nop.Web.Areas.Admin.Controllers
             productAttributeMapping.ValidationFileAllowedExtensions = model.ValidationFileAllowedExtensions;
             productAttributeMapping.ValidationFileMaximumSize = model.ValidationFileMaximumSize;
             productAttributeMapping.DefaultValue = model.DefaultValue;
-            _productAttributeService.UpdateProductAttributeMapping(productAttributeMapping);
+
+            productAttributeMapping.NumericDefaultValue = model.NumericDefaultValue;
+            productAttributeMapping.NumericUnit = model.NumericUnit;
+            productAttributeMapping.IsPriceMultiply = model.IsPriceMultiply;
+            productAttributeMapping.ValidationNumericMinValue = model.ValidationNumericMinValue;
+            productAttributeMapping.ValidationNumericMaxValue = model.ValidationNumericMaxValue;
+            productAttributeMapping.ValidationNumericPrecision = model.ValidationNumericPrecision;
+
+
+        _productAttributeService.UpdateProductAttributeMapping(productAttributeMapping);
 
             UpdateLocales(productAttributeMapping, model);
 

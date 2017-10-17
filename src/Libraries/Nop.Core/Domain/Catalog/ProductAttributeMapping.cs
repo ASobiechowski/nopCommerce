@@ -68,6 +68,12 @@ namespace Nop.Core.Domain.Catalog
         public string DefaultValue { get; set; }
 
 
+        public decimal? NumericDefaultValue { get; set; }
+        public string NumericUnit { get; set; }
+        public bool IsPriceMultiply { get; set; }
+        public decimal? ValidationNumericMinValue { get; set; }
+        public decimal? ValidationNumericMaxValue { get; set; }
+        public int? ValidationNumericPrecision { get; set; }
 
         /// <summary>
         /// Gets or sets a condition (depending on other attribute) when this attribute should be enabled (visible).

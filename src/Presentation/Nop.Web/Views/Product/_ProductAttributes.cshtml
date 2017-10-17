@@ -126,13 +126,26 @@
                             break;
                         case AttributeControlType.TextBox:
                             {
-                                <input name="@(controlId)" type="text" class="textbox" id="@(controlId)" value="@attribute.DefaultValue" />
+                                <input name="@(controlId)" type="text" id="@(controlId)" value="@attribute.DefaultValue" />
                             }
                             break;
                         case AttributeControlType.NumericBox:
-                        {
-                            <input name="@(controlId)" type="text" class="textbox" id="@(controlId)" value="@attribute.DefaultValue" />
-                        }
+                            {
+                                Html.AddCssFileParts("~/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css");
+                                Html.AppendScriptParts("~/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js");
+                                    <input name="@(controlId)" type="text" id="@(controlId)" value="@attribute.NumericDefaultValue" />
+                            <script>
+                                $(document).ready(function() {
+                                    $("#@(controlId)").TouchSpin({
+                                        min: @(attribute.ValidationNumericMinValue),
+                                        max: @(attribute.ValidationNumericMaxValue),
+                                        decimals: @(attribute.ValidationNumericPrecision),
+                                        verticalbuttons: true,
+                                        postfix: '@(attribute.NumericUnit)'
+                                    });
+                                });
+                            </script>
+                            }
                             break;
                         case AttributeControlType.MultilineTextbox:
                             {
@@ -380,6 +393,11 @@
             string controlId = $"product_attribute_{attribute.Id}";
             switch (attribute.AttributeControlType)
             {
+                case AttributeControlType.NumericBox:
+                    {
+                        attributeChangeScriptsBuilder.AppendFormat("$('#{0}').change(function(){{{1}();}});\n", controlId, attributeChangeHandlerFuncName);
+                    }
+                    break;
                 case AttributeControlType.DropdownList:
                     {
                         attributeChangeScriptsBuilder.AppendFormat("$('#{0}').change(function(){{{1}();}});\n", controlId, attributeChangeHandlerFuncName);
