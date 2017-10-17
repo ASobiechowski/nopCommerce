@@ -44,7 +44,7 @@ namespace Nop.Web.Areas.Admin.Controllers
 
         #endregion
 
-        #region Constructors
+        #region Ctor
 
         public CustomerRoleController(ICustomerService customerService,
             ILocalizationService localizationService, 
@@ -250,7 +250,6 @@ namespace Nop.Web.Areas.Admin.Controllers
                 ErrorNotification(exc.Message);
                 return RedirectToAction("Edit", new { id = customerRole.Id });
             }
-
 		}
 
         public virtual IActionResult AssociateProductToCustomerRolePopup()

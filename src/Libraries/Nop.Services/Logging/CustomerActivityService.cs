@@ -97,7 +97,7 @@ namespace Nop.Services.Logging
         protected virtual IList<ActivityLogTypeForCaching> GetAllActivityTypesCached()
         {
             //cache
-            string key = string.Format(ACTIVITYTYPE_ALL_KEY);
+            var key = string.Format(ACTIVITYTYPE_ALL_KEY);
             return _cacheManager.Get(key, () =>
             {
                 var result = new List<ActivityLogTypeForCaching>();
@@ -198,7 +198,6 @@ namespace Nop.Services.Logging
             return InsertActivity(_workContext.CurrentCustomer, systemKeyword, comment, commentParams);
         }
 
-
         /// <summary>
         /// Inserts an activity log item
         /// </summary>
@@ -220,8 +219,6 @@ namespace Nop.Services.Logging
             comment = CommonHelper.EnsureNotNull(comment);
             comment = string.Format(comment, commentParams);
             comment = CommonHelper.EnsureMaximumLength(comment, 4000);
-
-            
 
             var activity = new ActivityLog();
             activity.ActivityLogTypeId = activityType.Id;
@@ -263,7 +260,7 @@ namespace Nop.Services.Logging
             int pageIndex = 0, int pageSize = int.MaxValue, string ipAddress = null)
         {
             var query = _activityLogRepository.Table;
-            if(!String.IsNullOrEmpty(ipAddress))
+            if(!string.IsNullOrEmpty(ipAddress))
                 query = query.Where(al => al.IpAddress.Contains(ipAddress));
             if (createdOnFrom.HasValue)
                 query = query.Where(al => createdOnFrom.Value <= al.CreatedOnUtc);
@@ -305,7 +302,7 @@ namespace Nop.Services.Logging
 
 
                 //do all databases support "Truncate command"?
-                string activityLogTableName = _dbContext.GetTableName<ActivityLog>();
+                var activityLogTableName = _dbContext.GetTableName<ActivityLog>();
                 _dbContext.ExecuteSqlCommand($"TRUNCATE TABLE [{activityLogTableName}]");
             }
             else
@@ -315,7 +312,7 @@ namespace Nop.Services.Logging
                     _activityLogRepository.Delete(activityLogItem);
             }
         }
-        #endregion
 
+        #endregion
     }
 }

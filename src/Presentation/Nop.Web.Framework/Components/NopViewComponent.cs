@@ -31,7 +31,7 @@ namespace Nop.Web.Framework.Components
         /// <param name="viewName">The name of the partial view to render.</param>
         /// <param name="model">The model object for the view.</param>
         /// <returns>A <see cref="ViewViewComponentResult"/>.</returns>
-        public ViewViewComponentResult View<TModel>(string viewName, TModel model)
+        public new ViewViewComponentResult View<TModel>(string viewName, TModel model)
         {
             PublishModelPrepared(model);
 
@@ -40,16 +40,27 @@ namespace Nop.Web.Framework.Components
         }
 
         /// <summary>
-        /// Returns a result which will render the partial view with name <c>&quot;Default&quot;</c>.
+        /// Returns a result which will render the partial view
         /// </summary>
         /// <param name="model">The model object for the view.</param>
         /// <returns>A <see cref="ViewViewComponentResult"/>.</returns>
-        public ViewViewComponentResult View<TModel>(TModel model)
+        public new ViewViewComponentResult View<TModel>(TModel model)
         {
             PublishModelPrepared(model);
 
             //invoke the base method
             return base.View<TModel>(model);
+        }
+
+        /// <summary>
+        ///  Returns a result which will render the partial view with name viewName
+        /// </summary>
+        /// <param name="viewName">The name of the partial view to render.</param>
+        /// <returns>A <see cref="ViewViewComponentResult"/>.</returns>
+        public new ViewViewComponentResult View(string viewName)
+        {
+            //invoke the base method
+            return base.View(viewName);
         }
     }
 }

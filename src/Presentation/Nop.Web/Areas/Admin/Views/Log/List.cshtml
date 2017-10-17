@@ -86,7 +86,7 @@
                     <div class="panel-body">
                         <div id="log-grid"></div>
 
-                        <script>
+                        <script type="text/javascript">
                             $(document).ready(function() {
                                 $("#log-grid").kendoGrid({
                                     dataSource: {
@@ -135,7 +135,8 @@
                                         width: 100
                                     }, {
                                         field: "ShortMessage",
-                                        title: "@T("Admin.System.Log.Fields.ShortMessage")"
+                                        title: "@T("Admin.System.Log.Fields.ShortMessage")",
+                                        encoded: false
                                     }, {
                                         field: "CreatedOn",
                                         title: "@T("Admin.System.Log.Fields.CreatedOn")",

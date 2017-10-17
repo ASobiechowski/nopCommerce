@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -39,11 +38,10 @@ namespace Nop.Core.Html.CodeFormatter
             options.Title = match.Groups["title"].Value;
             options.AlternateLineNumbers = match.Groups["altlinenumbers"].Value == "on";
 
-            string result = match.Value.Replace(match.Groups["begin"].Value, "");
+            var result = match.Value.Replace(match.Groups["begin"].Value, "");
             result = result.Replace(match.Groups["end"].Value, "");
             result = Highlight(options, result);
             return result;
-
         }
 
         /// <summary>
@@ -64,10 +62,9 @@ namespace Nop.Core.Html.CodeFormatter
             options.Title = string.Empty;
             options.AlternateLineNumbers = false;
 
-            string result = match.Value;
+            var result = match.Value;
             result = Highlight(options, result);
             return result;
-
         }
 
         /// <summary>
@@ -116,7 +113,7 @@ namespace Nop.Core.Html.CodeFormatter
                     htmlf.LineNumbers = options.DisplayLineNumbers;
                     htmlf.Alternate = options.AlternateLineNumbers;
                     text = StripHtml(text).Trim();
-                    string code = htmlf.FormatCode(WebUtility.HtmlDecode(text)).Trim();
+                    var code = htmlf.FormatCode(WebUtility.HtmlDecode(text)).Trim();
                     return code.Replace("\r\n", "<br />").Replace("\n", "<br />");
 
                 case "xml":
@@ -125,7 +122,7 @@ namespace Nop.Core.Html.CodeFormatter
                     xmlf.Alternate = options.AlternateLineNumbers;
                     text = text.Replace("<br />", "\r\n");
                     text = StripHtml(text).Trim();
-                    string xml = xmlf.FormatCode(WebUtility.HtmlDecode(text)).Trim();
+                    var xml = xmlf.FormatCode(WebUtility.HtmlDecode(text)).Trim();
                     return xml.Replace("\r\n", "<br />").Replace("\n", "<br />");
 
                 case "tsql":
@@ -155,12 +152,12 @@ namespace Nop.Core.Html.CodeFormatter
         /// <returns>Formatted text</returns>
         public static string FormatTextSimple(string text)
         {
-            if (String.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 return string.Empty;
 
             if (text.Contains("[/code]"))
             {
-                text = regexCode2.Replace(text, new MatchEvaluator(CodeEvaluatorSimple));
+                text = regexCode2.Replace(text, CodeEvaluatorSimple);
                 text = regexCode2.Replace(text, "$1");
             }
             return text;

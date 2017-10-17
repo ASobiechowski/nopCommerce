@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +11,9 @@ using Nop.Core.Domain;
 using Nop.Core.Http;
 using Nop.Core.Infrastructure;
 using Nop.Services.Authentication;
+using Nop.Services.Logging;
 using Nop.Services.Security;
+using Nop.Web.Framework.Diagnostic;
 using Nop.Web.Framework.Globalization;
 using Nop.Web.Framework.Mvc.Routing;
 using StackExchange.Profiling.Storage;
@@ -39,7 +42,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         {
             var nopConfig = EngineContext.Current.Resolve<NopConfig>();
             var hostingEnvironment = EngineContext.Current.Resolve<IHostingEnvironment>();
-            bool useDetailedExceptionPage = nopConfig.DisplayFullErrorStack || hostingEnvironment.IsDevelopment();
+            var useDetailedExceptionPage = nopConfig.DisplayFullErrorStack || hostingEnvironment.IsDevelopment();
             if (useDetailedExceptionPage)
             {
                 //get detailed exceptions for developing and testing purposes
@@ -53,6 +56,18 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         }
 
         /// <summary>
+        /// Add diagnostic listener
+        /// </summary>
+        /// <param name="application">Builder for configuring an application's request pipeline</param>
+        public static void UseDiagnosticListener(this IApplicationBuilder application)
+        {
+            var diagnosticListener = EngineContext.Current.Resolve<DiagnosticListener>();
+
+            //listen for middleware events
+            diagnosticListener.SubscribeWithAdapter(new NopDiagnosticListener());
+        }
+
+        /// <summary>
         /// Adds a special handler that checks for responses with the 404 status code that do not have a body
         /// </summary>
         /// <param name="application">Builder for configuring an application's request pipeline</param>
@@ -61,7 +76,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             application.UseStatusCodePages(async context =>
             {
                 //handle 404 Not Found
-                if (context.HttpContext.Response.StatusCode == 404)
+                if (context.HttpContext.Response.StatusCode == StatusCodes.Status404NotFound)
                 {
                     var webHelper = EngineContext.Current.Resolve<IWebHelper>();
                     if (!webHelper.IsStaticResource())
@@ -99,6 +114,27 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             });
         }
 
+
+        /// <summary>
+        /// Adds a special handler that checks for responses with the 400 status code (bad request)
+        /// </summary>
+        /// <param name="application">Builder for configuring an application's request pipeline</param>
+        public static void UseBadRequestResult(this IApplicationBuilder application)
+        {
+            application.UseStatusCodePages(context =>
+            {
+                //handle 404 (Bad request)
+                if (context.HttpContext.Response.StatusCode == StatusCodes.Status400BadRequest)
+                {
+                    var logger = EngineContext.Current.Resolve<ILogger>();
+                    var workContext = EngineContext.Current.Resolve<IWorkContext>();
+                    logger.Error("Error 400. Bad request", null, customer: workContext.CurrentCustomer);
+                }
+
+                return System.Threading.Tasks.Task.CompletedTask;
+            });
+        }
+
         /// <summary>
         /// Configure middleware checking whether requested page is keep alive page
         /// </summary>
@@ -123,6 +159,10 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <param name="application">Builder for configuring an application's request pipeline</param>
         public static void UseNopAuthentication(this IApplicationBuilder application)
         {
+            //check whether database is installed
+            if (!DataSettingsHelper.DatabaseIsInstalled())
+                return;
+
             application.UseMiddleware<AuthenticationMiddleware>();
         }
 
